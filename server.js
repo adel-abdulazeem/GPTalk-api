@@ -7,8 +7,7 @@ const MongoStore = require("connect-mongo")(session);
 const flash = require("express-flash");
 const logger = require("morgan");
 const cors = require("cors")
-const bodyParser = require('body-parser');
-
+const cron = require('node-cron')
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const resRoutes = require("./routes/response")
@@ -71,9 +70,27 @@ app.use(flash());
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/generate", resRoutes)
-let port = process.env.PORT || 6000
-//Server Running
 
+const checkServerHealth = async () => {
+  try {
+    const response = await fetch(``);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log("Server health check successful:", data);
+  } catch (error) {
+    console.error("Server health check failed:", error.message);
+  }
+};
+// Schedule health check every 5 minutes
+cron.schedule("*/5 * * * *", () => {
+  console.log("Running health check...");
+  checkServerHealth();
+});
+
+//Server Running
+let port = process.env.PORT || 6000
 app.listen(port, () => {
   console.log(`Server running in ${process.env.NODE_ENV} on port: ${port}`);
 });

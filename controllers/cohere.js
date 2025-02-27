@@ -18,8 +18,9 @@ module.exports = {
         model: "command",
         message: message,
     });
-    
+
     for await (const chat of stream) {
+        console.log(chat)
         if (chat.eventType === "text-generation") {
 
         console.log( `data: ${JSON.stringify({ data : chat.text })}\n\n`)
