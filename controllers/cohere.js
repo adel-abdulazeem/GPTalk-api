@@ -5,8 +5,6 @@ module.exports = {
   generateRes: async (req, res) => {
     try {
     const {message} = req.body
-    console.log(message)
-    console.log(req.body)
     res.setHeader('Content-Type', 'text/event-stream');
     res.setHeader('Cache-Control', 'no-cache');
     res.setHeader('Connection', 'keep-alive');
@@ -20,10 +18,7 @@ module.exports = {
     });
 
     for await (const chat of stream) {
-        console.log(chat)
         if (chat.eventType === "text-generation") {
-
-        console.log( `data: ${JSON.stringify({ data : chat.text })}\n\n`)
         res.write(`data: ${JSON.stringify({ data: chat.text })}\n\n`);
         res.write(`event: complete\ndata: ${JSON.stringify({ status: 'done' })}\n\n`);
         }        

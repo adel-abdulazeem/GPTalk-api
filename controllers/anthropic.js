@@ -11,8 +11,6 @@ async function* streamClaudeData(data) {
 module.exports = {
   generateRes: async (req, res) => {
     try {
-      const {message} = req.body
-      console.log(message)
       console.log(req.body)
       res.setHeader('Content-Type', 'text/event-stream');
       res.setHeader('Cache-Control', 'no-cache');
