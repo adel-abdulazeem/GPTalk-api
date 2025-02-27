@@ -91,6 +91,6 @@ cron.schedule("*/5 * * * *", () => {
 //Server Running
 let port = process.env.PORT || 6000
 app.listen(port, () => {
-  console.log(`Server running in ${process.env.NODE_ENV} on port: ${port}`);
+  console.log(`Server running in on port: ${port}`);
 });
  
