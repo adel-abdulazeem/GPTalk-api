@@ -13,12 +13,12 @@ module.exports = {
     const cohere = new CohereClient({
     token: process.env.COHERE_API_TOKEN,
     });
-    
+
     const stream = await cohere.chatStream({
         model: "command",
         message: message,
     });
-
+    
     for await (const chat of stream) {
         if (chat.eventType === "text-generation") {
 
