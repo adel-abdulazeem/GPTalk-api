@@ -1,3 +1,4 @@
+
 const Anthropic = require('@anthropic-ai/sdk');
 require("dotenv").config({ path: "../config/.env" });
 
@@ -57,20 +58,3 @@ module.exports = {
   },
 };
 
-//  async function generator(){
-//   const stream = await anthropic.messages.create({
-//     model: "claude-3-5-sonnet-20241022",
-//     max_tokens: 1024,
-//     messages: [{ role: "user", content: 'can you draw me a mpls mermaid diagram notation' }],
-//     stream: true
-//   });
-//   console.log(stream);
-//         for await (const event of stream) {
-//         if (event.type === 'content_block_delta') {
-//           const chunk = event.delta.text;
-//           console.log(chunk)
-//           res.write(`data: ${JSON.stringify( chunk )}\n\n`);
-//         }
-//       }
-//  }
-//  generator()
