@@ -73,7 +73,7 @@ app.use("/generate", resRoutes)
 
 const checkServerHealth = async () => {
   try {
-    const response = await fetch(``);
+    const response = await fetch(`https://gptalk-api.onrender.com`);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
@@ -84,7 +84,7 @@ const checkServerHealth = async () => {
   }
 };
 // Schedule health check every 5 minutes
-cron.schedule("*/5 * * * *", () => {
+cron.schedule("*/14 * * * *", () => {
   checkServerHealth();
 });
 
