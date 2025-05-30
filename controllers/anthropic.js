@@ -56,3 +56,60 @@ module.exports = {
   },
 };
 
+//server logic to handle different content types from Claude's response
+/*
+module.exports = {
+  generateRes: async (req, res) => {
+    try {
+      res.setHeader('Content-Type', 'text/event-stream');
+      res.setHeader('Cache-Control', 'no-cache');
+      res.setHeader('Connection', 'keep-alive');
+
+      const anthropic = new Anthropic({
+        apiKey: process.env.ANTHROPIC_API_KEY
+      });
+
+      const stream = await anthropic.messages.create({
+        model: "claude-3-5-sonnet-20241022",
+        max_tokens: 1024,
+        messages: [{ role: "user", content: message }],
+        stream: true
+      });
+
+      // Stream the response
+      for await (const event of stream) {
+        if (event.type === 'content_block_delta') {
+          const chunk = event.delta;
+          
+          // Determine the content type
+          let responseData = {
+            type: 'text',
+            content: chunk.text
+          };
+
+          // If the content contains diagram markers, change the type
+          if (chunk.text && chunk.text.includes('```mermaid')) {
+            responseData.type = 'diagram';
+          }
+          // You can add more content type checks here
+          
+          console.log(`data: ${JSON.stringify(responseData)}\n\n`);
+          res.write(`data: ${JSON.stringify(responseData)}\n\n`);
+        }
+      }
+      
+      res.end();
+    } catch (err) {
+      console.error('Stream error:', err);
+      if (!res.headersSent) {
+        return res.status(500).json({
+          status: 'error',
+          message: 'Failed to start stream',
+          error: process.env.NODE_ENV === 'development' ? err.message : 'Internal error'
+        });
+      }
+    }
+  },
+};
+
+ */
