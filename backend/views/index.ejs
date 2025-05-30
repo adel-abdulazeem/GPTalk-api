@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Login</title>
+  <style>
+    /* Reset & Base */
+    * {
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    /* Centering Container */
+    .login-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 1rem;
+    }
+
+    /* Card */
+    .login-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 400px;
+      padding: 2rem;
+    }
+
+    .login-card h1 {
+      margin-bottom: 0.5rem;
+      font-size: 1.75rem;
+      color: #333;
+    }
+    .login-card p {
+      margin-bottom: 1.5rem;
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    /* Form Fields */
+    .login-card label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+      color: #444;
+    }
+    .login-card input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+    .login-card input:focus {
+      border-color: #667eea;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(102,126,234,0.3);
+    }
+
+    /* Button */
+    .login-card button {
+      width: 100%;
+      padding: 0.85rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #667eea;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .login-card button:hover {
+      background-color: #5a67d8;
+    }
+
+    /* Responsive Text */
+    @media (max-width: 480px) {
+      .login-card {
+        padding: 1.5rem;
+      }
+      .login-card h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-wrapper">
+    <div class="login-card">
+      <h1>Admin Login</h1>
+      <p>Enter the administrator email and password to make changes to cemetery records.</p>
+      <form action="/auth/login" method="POST" id="login-form" autocomplete="off">
+        <div>
+          <label for="username">Email:</label>
+          <input type="text" id="username" name="username" autocomplete="username" required>
+        </div>
+        <div>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" autocomplete="current-password" required>
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

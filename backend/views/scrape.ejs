@@ -1,0 +1,65 @@
+<!-- scrape.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scrape Uploader</title>
+  <meta name="auth-token" >
+    <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+    th {
+      background: #f4f4f4;
+    }
+  </style>
+</head>
+<body>
+  <form id="scrapeForm" action="/post" method="POST">
+    <input type="hidden" name="source_url" >
+    <textarea name="raw_payload">
+    <textarea name="metadata"></textarea>
+    <input type="submit">Upload Scrape</button>
+  </form>
+    <div class="btn-group">
+      <form action="/auth/logout" method="GET" style="margin:0;">
+        <button class="btn" type="submit">Logout</button>
+      </form>
+    </div>
+    <h1>Scraped Items</h1>
+  
+  <% if (items && items.length) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Scraped At</th>
+          <th>Source URL</th>
+          <th>Raw Payload</th>
+          <th>Metadata</th>
+          <th>Processed?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% items.forEach(item => { %>
+          <tr>
+            <td><%= new Date(item.scraped_at).toLocaleString() %></td>
+            <td><%= item.source_url || '-' %></td>
+            <td><pre><%= item.raw_payload %></pre></td>
+            <td><%= item.metadata === null ? 'null' : JSON.stringify(item.metadata) %></td>
+            <td><%= item.processed ? 'Yes' : 'No' %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p>No items found.</p>
+  <% } %>
+</body>
+</html>
