@@ -1,4 +1,4 @@
-# Claude-Integrated SSE API
+# GPTalk-AI Integrated SSE API
 
 This API integrates with the Claude API to provide natural language processing capabilities and streams responses in chunks using Server-Sent Events (SSE). It is designed for a React application that renders the streamed chunks in real-time.
 
